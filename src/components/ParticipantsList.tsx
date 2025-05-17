@@ -17,23 +17,38 @@ const participants = [
 	{ name: "Alex" },
 	{ name: "Sophia" },
 	{ name: "Michael" },
+	{
+		name: "Liam",
+		avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+	},
+	{
+		name: "Emma",
+		avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+	},
+	{
+		name: "Olivia",
+		avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+	},
+	{
+		name: "Noah",
+		avatar: "https://randomuser.me/api/portraits/men/76.jpg",
+	},
+	{ name: "Ava" },
+	{ name: "William" },
 ];
 
 const ParticipantsList: React.FC = () => {
 	return (
 		<div className="flex flex-col flex-1 h-full">
-			<div className="mb-4 pb-3 border-b">
-				<h2 className="text-lg font-semibold text-gray-800">Participants</h2>
-				<p className="text-sm text-gray-500">
-					{participants.length} participants
-				</p>
+			<div className="mb-2 text-sm text-gray-600 font-medium">
+				{participants.length} participant{participants.length !== 1 ? "s" : ""}
 			</div>
 			<div className="flex-1 overflow-y-auto mb-4 pr-1">
 				<ul className="space-y-3">
 					{participants.map((p, i) => (
 						<li
 							key={i}
-							className="flex items-center justify-between bg-white p-2 rounded shadow-sm hover:shadow-md transition-all duration-200"
+							className="flex items-center justify-between bg-white/70 glass-effect p-2 rounded shadow-sm hover:shadow-md transition-all duration-200"
 						>
 							<div className="flex items-center gap-2">
 								{p.avatar ? (

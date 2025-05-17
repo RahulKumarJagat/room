@@ -58,10 +58,10 @@ const ChatPanel: React.FC = () => {
   
   return (
     <div className="flex flex-col flex-1 h-full">
-      <div className="mb-4 pb-3 border-b">
+      {/* Remove or comment out the heading below */}
+      {/* <div className="mb-4 pb-3 border-b">
         <h2 className="text-lg font-semibold text-gray-800">Chat</h2>
-        <p className="text-sm text-gray-500">6 participants</p>
-      </div>
+      </div> */}
 
       <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-1">
         {messages.map((msg) => (

@@ -1,18 +1,61 @@
-import React from "react";
-import { Button } from "../ui/button";
+import React, { useEffect, useRef, useState } from "react";
 
 const Header: React.FC = () => {
+  const [seconds, setSeconds] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const hideTimeout = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Timer logic
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setSeconds((s) => s + 1);
+    }, 1000);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  // Auto-hide logic: show on mousemove at top 80px, hide after 5s
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (e.clientY < 80) {
+        setVisible(true);
+        if (hideTimeout.current) clearTimeout(hideTimeout.current);
+        hideTimeout.current = setTimeout(() => setVisible(false), 5000);
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (hideTimeout.current) clearTimeout(hideTimeout.current);
+    };
+  }, []);
+
+  const formatTime = (secs: number) => {
+    const m = Math.floor(secs / 60)
+      .toString()
+      .padStart(2, "0");
+    const s = (secs % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
+
   return (
-    <header className="p-3 sm:p-4 border-b flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white bg-opacity-70 backdrop-blur-md shadow-md">
-      <div className="mb-2 sm:mb-0">
-        <h1 className="text-lg sm:text-xl font-bold truncate">Sprint Planning Project - Week 1</h1>
-        <p className="text-xs sm:text-sm text-gray-500">Mindcare's Meeting Room</p>
-      </div>
-      <div className="flex gap-2 self-end sm:self-auto">
-        <Button variant="destructive" size="sm" className="text-xs sm:text-sm">Reject</Button>
-        <Button variant="default" size="sm" className="text-xs sm:text-sm">Accept</Button>
-      </div>
-    </header>
+    <div
+      className={`
+        fixed top-6 left-1/2 transform -translate-x-1/2
+        flex gap-4 px-8 py-3 rounded-2xl
+        bg-white/80 glass-effect shadow-2xl
+        z-30 border border-gray-200 items-center
+        backdrop-blur-lg transition-all
+        min-w-[320px] max-w-[600px]
+        ${visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+        duration-500
+      `}
+    >
+      <span className="font-semibold text-lg">Meeting Room</span>
+      <span className="text-gray-700 font-mono text-base">{formatTime(seconds)}</span>
+    </div>
   );
 };
 
