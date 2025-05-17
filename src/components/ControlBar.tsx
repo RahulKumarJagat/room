@@ -150,20 +150,51 @@ const ControlBar: React.FC<ControlBarProps> = ({
   );
   
   return (
-    <footer className="py-2 px-3 sm:py-4 sm:px-4 border-t bg-white bg-opacity-70 backdrop-blur-md shadow-inner">
-      <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
+    <footer
+      className="
+        fixed
+        left-1/2
+        bottom-4
+        -translate-x-1/2
+        z-30
+        px-2
+        w-[98vw]
+        sm:w-auto
+        max-w-[98vw]
+        flex
+        justify-center
+        pointer-events-none
+      "
+    >
+      <div
+        className="
+          flex flex-wrap justify-center items-center gap-2 sm:gap-4
+          glass-effect
+          rounded-2xl
+          shadow-2xl
+          px-3 py-2 sm:px-6 sm:py-3
+          pointer-events-auto
+          border border-white/40
+          backdrop-blur-lg
+          bg-white/70
+          bg-opacity-80
+          transition-all
+          duration-300
+        "
+        style={{ minWidth: 220 }}
+      >
         {primaryControls}
-        
+
         {isMobile ? (
           <div className="relative">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={() => setShowMoreMenu(!showMoreMenu)}
               className="transition-all duration-200 hover:bg-gray-100"
             >
               <MoreHorizontal className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
-            
+
             {showMoreMenu && (
               <div className="absolute bottom-full right-0 mb-2 bg-white p-2 rounded shadow-md grid grid-cols-3 gap-2 z-20">
                 {secondaryControls}
