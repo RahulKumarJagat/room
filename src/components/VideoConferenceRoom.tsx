@@ -18,7 +18,7 @@ export default function VideoConferenceRoom() {
   const [pinnedUser, setPinnedUser] = useState<number | null>(null);
   
   const sidePanelRef = useClickOutside<HTMLDivElement>(() => {
-    if (window.innerWidth < 768 && (showChat || showParticipants)) {
+    if (window.innerWidth < 768) {
       setShowChat(false);
       setShowParticipants(false);
     }
@@ -60,7 +60,7 @@ export default function VideoConferenceRoom() {
       <Header />
 
       <div className="flex flex-1 relative overflow-hidden">
-        <main className="flex-1 p-2 sm:p-4 overflow-y-auto glass-effect z-0 transition-all duration-300">
+        <main className={`flex-1 p-2 sm:p-4 overflow-y-auto glass-effect z-0 transition-all duration-300 ${(showChat || showParticipants) ? 'md:mr-[25%]' : ''}`}>
           <VideoGrid 
             presentationMode={presentationMode} 
             raisedHands={raisedHands}
