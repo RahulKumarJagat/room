@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/30 backdrop-blur-lg border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)];
+  }
+  
+  .glass-card {
+    @apply bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-md border border-white/30 shadow-lg
+           hover:shadow-xl transition-all duration-300;
+  }
+  
+  .glass-button {
+    @apply bg-gradient-to-r from-white/30 via-white/20 to-white/30 backdrop-blur-sm 
+           border border-white/30 shadow-[0_4px_12px_0_rgba(31,38,135,0.15)]
+           hover:shadow-[0_4px_16px_0_rgba(31,38,135,0.25)] hover:bg-white/40
+           active:transform active:scale-95 transition-all duration-200;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out forwards;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
