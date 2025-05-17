@@ -1,4 +1,4 @@
-import React from 'react';
+
 import VideoConferenceRoom from './components/VideoConferenceRoom';
 
 function App() {
