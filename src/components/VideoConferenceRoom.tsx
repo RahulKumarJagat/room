@@ -60,7 +60,7 @@ export default function VideoConferenceRoom() {
       <Header />
 
       <div className="flex flex-1 relative overflow-hidden">
-        <main className={`flex-1 p-2 sm:p-4 overflow-y-auto glass-effect z-0 transition-all duration-300 ${(showChat || showParticipants) ? 'md:mr-[25%]' : ''}`}>
+        <main className={`flex-1 p-2 sm:p-4 overflow-y-auto glass-effect z-0 transition-all duration-300 ${(showChat || showParticipants) ? 'md:mr-0' : ''}`}>
           <VideoGrid 
             presentationMode={presentationMode} 
             raisedHands={raisedHands}

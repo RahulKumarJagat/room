@@ -20,7 +20,7 @@ const SidePanel = forwardRef<HTMLDivElement, SidePanelProps>(
     return (
       <aside 
         ref={ref}
-        className="absolute md:relative right-0 top-0 h-full w-5/6 sm:w-2/3 md:w-1/3 lg:w-1/4 border-l p-3 sm:p-4 flex flex-col bg-white bg-opacity-95 backdrop-blur-md z-10 shadow-lg transform transition-transform duration-300 ease-in-out"
+        className="absolute md:static right-0 top-0 h-full w-5/6 sm:w-2/3 md:w-1/4 border-l p-3 sm:p-4 flex flex-col bg-white bg-opacity-95 backdrop-blur-md z-10 shadow-lg"
       >
         <div className="flex justify-between items-center mb-4 md:hidden">
           <h2 className="text-lg font-semibold">
