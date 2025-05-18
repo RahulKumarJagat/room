@@ -1,68 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button } from "../ui/button";
 import { Send } from "lucide-react";
 
-const ChatPanel: React.FC = () => {
+interface ChatPanelProps {
+  messages: any[];
+  onSendMessage: (msg: string) => void;
+}
+
+const ChatPanel: React.FC<ChatPanelProps> = ({ messages, onSendMessage }) => {
   const [message, setMessage] = useState("");
-  
-  const messages = [
-    {
-      id: 1,
-      sender: "Park Cho",
-      avatar: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg",
-      message: "Hi Guys, Let's Discuss Our Project",
-      time: "09:31 AM"
-    },
-    {
-      id: 2,
-      sender: "Catherine",
-      avatar: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
-      message: "Sure, I'm very excited 🔥",
-      time: "09:32 AM"
-    },
-    {
-      id: 3,
-      sender: "You",
-      avatar: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
-      message: "Wohoo.. This is so Cool Guys! 😎",
-      time: "09:33 AM"
-    },
-    {
-      id: 4,
-      sender: "Park Cho",
-      avatar: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg",
-      message: "What are everyone's thoughts on the new design system?",
-      time: "09:34 AM"
-    },
-    {
-      id: 5,
-      sender: "Catherine",
-      avatar: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
-      message: "I think it looks great, but I have some concerns about the color palette.",
-      time: "09:35 AM"
-    }
-  ];
-  
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const handleSendMessage = () => {
     if (message.trim() === "") return;
-    // Would handle sending message here
+    onSendMessage(message);
     setMessage("");
   };
-  
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
   };
-  
+
   return (
     <div className="flex flex-col flex-1 h-full">
-      {/* Remove or comment out the heading below */}
-      {/* <div className="mb-4 pb-3 border-b">
-        <h2 className="text-lg font-semibold text-gray-800">Chat</h2>
-      </div> */}
-
       <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-1">
         {messages.map((msg) => (
           <div
@@ -99,6 +66,7 @@ const ChatPanel: React.FC = () => {
             </div>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
 
       <div className="flex gap-2 mt-auto">
