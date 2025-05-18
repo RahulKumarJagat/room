@@ -4,7 +4,7 @@ const Header: React.FC = () => {
   const [seconds, setSeconds] = useState(0);
   const [visible, setVisible] = useState(false);
   const hideTimeout = useRef<NodeJS.Timeout | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<y.Timeout | null>(null);
 
   // Timer logic
   useEffect(() => {
